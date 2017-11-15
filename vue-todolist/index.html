@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/icon-font.css"/>
+		<link rel="stylesheet" type="text/css" href="css/todoList.css"/>
+	</head>
+	<body>
+		<div id="app">
+			<div class="app-title">Todo List</div>
+			<div class="app-body">
+				<div class="input-new-task">
+					<span>
+						<i class="icon icon-drop">&#xe61d;</i>
+					</span>
+					<input type="text" v-model="task.content"
+						class="input"
+						@keyup.enter="addNewTask" />
+				</div>
+				<div class="task-list">
+					<task-item v-for="( task, index ) in taskList"
+						:task="task"
+						v-bind:class="addClass( index )"
+						@change="changeState( index )"
+						@delete="deleteTask( index )"
+						:key="index">
+					</task-item>
+				</div>
+				<div class="footer">
+					<span class="rest-task">{{ taskList.length }} tasks left</span>
+					<div class="btn-wrapper">
+						<button class="btn"
+							@click="deleteAll">Clear Finished</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="https://unpkg.com/vue"></script>
+		<script src="js/todoList.js"></script>
+	</body>
+</html>
