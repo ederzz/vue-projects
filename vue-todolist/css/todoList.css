@@ -72,13 +72,15 @@ body {
 .task-list .finished .task-content{
 	text-decoration: line-through;
 }
-.task-list .finished .icon-finished{
-	visibility: visible;
-}
 .task-list .unfinished .icon-finished{
 	visibility: hidden;
 }
-
+.task-list>.show {
+	display: block;
+}
+.task-list>.hide {
+	display: none;
+}
 
 
 /*底部按钮组*/
@@ -104,6 +106,18 @@ body {
 	padding:3px 5px;
 	box-sizing: border-box;
 	color:rgba(0, 0, 0, 0.8)
+}
+.btn-wrapper .actived{
+	border:0.5px solid #f3c2c2;
+}
+.btn-wrapper .btn-all{
+	width:25px;
+}
+.btn-wrapper .btn-active{
+	width:47px;
+}
+.btn-wrapper .btn-completed{
+	width:75px;
 }
 .icon,.btn{
 	cursor:pointer;

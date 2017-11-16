@@ -29,9 +29,25 @@ Vue.component( 'task-item', {
 					task: {
 						content: '',
 						finished: false,
-						deleted: false
+						deleted: false,
+						show: true
 					},
-					taskList: []
+					taskList: [],
+					btnAllClass: {
+						btn: true,
+						'btn-all': true,
+						actived: true
+					},
+					btnActiveClass: {
+						btn: true,
+						'btn-active': true,
+						actived: false
+					},
+					btnFinishedClass: {
+						btn: true,
+						'btn-finished': true,
+						actived: false
+					}
 				},
 				methods: {
 					addNewTask() {
@@ -49,12 +65,58 @@ Vue.component( 'task-item', {
 					addClass( index ) {
 						return {
 							finished: this.taskList[index].finished,
-							unfinished: !this.taskList[index].finished
+							unfinished: !this.taskList[index].finished,
+							show: this.taskList[index].show,
+							hide: !this.taskList[index].show
 						}
 					},
 					deleteAll() {
 						//删除所有已完成任务
 						this.taskList = this.taskList.filter( ( task ) => !task.finished );
+					},
+					showActive() {
+						this.btnAllClass.actived = false;
+						this.btnActiveClass.actived = false;
+						this.btnFinishedClass.actived = false;
+						this.btnActiveClass.actived = true;
+						this.taskList = this.taskList.map( ( task ) => {
+							if( task.finished ) {
+								task.show = false;
+							}else{
+								task.show = true;
+							}
+							return task;
+						} );
+					},
+					showFinished() {
+						this.btnAllClass.actived = false;
+						this.btnActiveClass.actived = false;
+						this.btnFinishedClass.actived = false;
+						this.btnFinishedClass.actived = true;
+						this.taskList = this.taskList.map( ( task ) => {
+							if( !task.finished ) {
+								task.show = false;
+							}else{
+								task.show = true;
+							}
+							return task;
+						} );
+					},
+					showAll() {
+						this.btnAllClass.actived = false;
+						this.btnActiveClass.actived = false;
+						this.btnFinishedClass.actived = false;
+						this.btnAllClass.actived = true;
+						this.taskList = this.taskList.map( ( task ) => {
+							task.show = true;
+							return task;
+						} );
+					},
+					hideAll() {
+						this.taskList = this.taskList.map( ( task ) => {
+							task.show = !task.show;
+							return task;
+						} );
 					}
 				},
 			} );

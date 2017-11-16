@@ -11,7 +11,7 @@
 			<div class="app-title">Todo List</div>
 			<div class="app-body">
 				<div class="input-new-task">
-					<span>
+					<span @click="hideAll">
 						<i class="icon icon-drop">&#xe61d;</i>
 					</span>
 					<input type="text" v-model="task.content"
@@ -30,6 +30,12 @@
 				<div class="footer">
 					<span class="rest-task">{{ taskList.length }} tasks left</span>
 					<div class="btn-wrapper">
+						<button v-bind:class="btnAllClass"
+							@click="showAll">All</button>
+						<button :class="btnActiveClass"
+							@click="showActive">Active</button>
+						<button :class="btnFinishedClass"
+							@click="showFinished">Finished</button>
 						<button class="btn"
 							@click="deleteAll">Clear Finished</button>
 					</div>
