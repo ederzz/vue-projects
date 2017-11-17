@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.result,
+			.enter {
+				width:224px;
+				height:30px;
+				background: #e0dcdd;
+				line-height: 30px;
+				text-align: right;
+				padding:0 10px;
+			}
+			.result {
+				font-size: 20px;
+			}
+			.key-board {
+				width:60px;
+				height:60px;
+				border:0.5px solid rgba( 0,0,0,0.1 );
+				float:left;
+				line-height: 60px;
+				text-align: center;
+			}
+			.panel {
+				width:244px;
+			}
+			.panel::after {
+				content: '';
+				display: block;
+				clear: both;
+			}
+			.key-board:nth-of-type(1),.key-board:nth-of-type(16) {
+				color: #de5f39;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="result">
+				{{ result }}
+			</div>
+			<div class="enter">
+				{{ enter === '' ? 0 : enter }}
+			</div>
+			<div class="panel">
+				<!--键盘区域-->
+				<keyboard v-for="( key, index ) in keys"
+					:key="index"
+					:value="key"></keyboard>
+			</div>
+		</div>
+		
+		
+		<script src="https://unpkg.com/vue"></script>
+		<script src="https://cdn.bootcss.com/vuex/3.0.0/vuex.js"></script>
+		<script>
+			//创建store管理状态
+			const store = new Vuex.Store( {
+				state: {
+					result: '',
+					enter: '',
+					ifCal: false
+				},
+				mutations: {
+					calculate( state, value ) {
+						if( value === 'clear' ) {
+							state.result = state.enter = '';
+						}else if( value === '=' ) {
+							state.result = eval( state.enter );
+							state.enter += value;
+							state.ifCal = true;
+						}else{
+							if( state.ifCal ) {
+								state.ifCal = false;
+								state.enter = value;
+							}else{
+								state.enter += value;
+							}
+						}
+					}
+				}
+			} );
+			
+			//新建组件keyboard
+			Vue.component( 'keyboard', {
+				props: [ 'value' ],
+				template: `
+					<div @click="getKeyboardValue"
+						class="key-board"
+						:data-value="value">
+						{{ value }}
+					</div>
+				`,
+				methods: {
+					getKeyboardValue( e ) {
+						let value = e.target.dataset.value;
+						this.$store.commit( 'calculate', value );
+					}
+				}
+			} );
+			
+			//创建vue实例
+			const vm = new Vue( {
+				el: '#app',
+				data: {
+					keys: [
+						'clear', '+', '-', '*',
+						'7', '8', '9', '/',
+						'4', '5', '6', '0',
+						'1', '2', '3', '=',
+					]
+				},
+				computed: {
+					result() {
+						return this.$store.state.result;
+					},
+					enter() {
+						return this.$store.state.enter;
+					}
+				},
+				store
+			} );
+			
+		</script>
+	</body>
+</html>
