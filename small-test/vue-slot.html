@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="app">
+			<child-one>
+				<p>测试1</p>
+			</child-one>
+			
+			<!--具名插槽-->
+			<child-two>
+				<p slot="content">测试2</p>
+			</child-two>
+			
+			<!--组用于插槽-->
+			<child-three>
+				<div slot-scope="props">
+					{{ props.text }}
+				</div>
+			</child-three>
+		</div>
+		
+		
+		<script src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
+		<script>
+			Vue.component( 'child-one', {
+				template: `
+					<div>
+						<div>子组件标题</div>
+						<slot>没有内容时显示</slot>
+					</div>
+				`,
+			} );
+			Vue.component( 'child-two', {
+				template: `
+					<div>
+						<div>子组件标题</div>
+						<slot name="content">没有内容时显示</slot>
+					</div>
+				`,
+			} );
+			Vue.component( 'child-three', {
+				template: `
+					<div>
+						<div>子组件标题</div>
+						<slot :text="text3">没有内容时显示</slot>
+					</div>
+				`,
+				data() {
+					return {
+						text3: '测试3'
+					}
+				}
+			} );
+			
+			let vm = new Vue( {
+				el: '#app',
+				data: {
+					
+				}
+			} );
+			
+		</script>
+	</body>
+</html>
