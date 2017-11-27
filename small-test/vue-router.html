@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue-router</title>
+	</head>
+	<body>
+		<div id="app">
+			<!--路由设置方式一：path-->
+			<!--<nav>
+				<router-link to="/template">
+					vue-template
+				</router-link>
+				<router-link to="/router">
+					vue-router
+				</router-link>
+				<router-link to="/vuex">
+					vue-vuex
+				</router-link>
+			</nav>-->
+			<!---->
+			
+			<!--路由设置方式二：绑定一个对象 ,可以使用params传递参数，并且将这个userId参数添加到路由后面-->
+			<nav>
+				<router-link :to="{name: '1' ,params: { userId: 123 }}">
+					vue-template
+				</router-link>
+				<router-link :to="{name: '2'}">
+					vue-router
+				</router-link>
+				<router-link :to="{name: '3'}">
+					vue-vuex
+				</router-link>
+			</nav>
+			
+			<div class="content">
+				<router-view></router-view>
+				<router-view name="one"></router-view>
+			</div>
+		</div>
+		
+		
+		<script src="https://unpkg.com/vue"></script>
+		<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+		<script>
+			
+			const vueTemplate = {
+				template: `
+					<div>
+						<div>这里是vue-template</div>
+						<div>userId: {{ $route.params.userId }}</div>
+					</div>
+				`
+			}
+			const vueRouter = {
+				template: `
+					<div>这里是vue-router</div>
+				`
+			}
+			const vueVuex = {
+				template: `
+					<div>这里是vue-vuex</div>
+				`
+			}
+			
+			
+			//命名视图---用于在一个路由中使用多个组件，比如说导航组件和内容组件；
+			const vueViewOne = {
+				template: `
+					<div>命名视图one</div>
+				`
+			}
+			const vueViewTwo = {
+				template: `
+					<div>命名视图two</div>
+				`
+			}
+			const vueViewThree = {
+				template: `
+					<div>命名视图three</div>
+				`
+			}
+			
+			//如果每个路由只有一个组件就是使用component属性或者components
+			const router = new VueRouter( {
+				routes: [
+					{
+						path: '/template/:userId',
+						name: '1',
+						components: {
+							default: vueTemplate,
+							one: vueViewOne
+						}
+					},{
+						path: '/router',
+						name: '2',
+						components: {
+							default: vueRouter,
+							one: vueViewTwo
+						}
+					},{
+						path: '/vuex',
+						name: '3',
+						components: {
+							default: vueVuex,
+							one: vueViewThree
+						}
+					}
+				]
+			} );
+			
+			const app = new Vue( {
+				el: '#app',
+				router
+			} );
+		</script>
+	</body>
+</html>
