@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue-template</title>
+	</head>
+	<body>
+		<div id="app">
+			<test-overall></test-overall>
+			<test-part></test-part>
+			<test-overall-one></test-overall-one>
+			<test-part-temp></test-part-temp>
+		</div>
+		
+		<!--使用template方式声明字符串模板-->
+		<template id="test-one">
+			<div>使用template标签声明字符串模板</div>
+		</template>
+		
+		
+		<script src="https://unpkg.com/vue@2.5.8/dist/vue.js"></script>
+		
+		<!--使用script标签声明字符串模板-->
+		<script type="x-template" id="test-two">
+			<div>使用script标签声明字符串模板</div>
+		</script>
+		
+		<script>
+			//全局注册方式
+			Vue.component( 'test-overall', {
+				template: `
+					<div>全局注册组件</div>
+				`
+			});
+			
+			Vue.component( 'test-overall-one', {
+				template: '#test-one'
+			})
+			
+			
+			
+			new Vue( {
+				el: '#app',
+				components: {
+					'test-part':{
+						template: `
+							<div>
+								局部注册组件
+							</div>
+						`
+					},
+					'test-part-temp': {
+						template: '#test-two'
+					}
+				}
+			} );
+			
+		</script>
+	</body>
+</html>
