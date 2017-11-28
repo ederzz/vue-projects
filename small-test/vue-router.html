@@ -105,7 +105,20 @@
 							default: vueVuex,
 							one: vueViewThree
 						}
-					}
+					},
+					// {
+					// 	path: '/test',
+					// 	component: () => import( 'test.vue' ),
+					// 	component: resolve => require( ['test.vue'], resolve ),
+					// 	children: [
+					// 		{
+					// 			path: '',
+					// 			component:
+					// 		},
+					// 		{}
+					// 	]
+					// }
+					// children是嵌套路由， 上面两种component定义方式都是懒加载
 				]
 			} );
 			
