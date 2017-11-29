@@ -1,8 +1,8 @@
 <template>
 	<div class="main-page">
-		<m-header></m-header>
 		<side-bar></side-bar>
 		<div class="content">
+			<u-header></u-header>
 			<router-view></router-view>
 		</div>
 	</div>
@@ -10,30 +10,25 @@
 
 <script>
 	import SideBar from './SideBar.vue'
-	import MHeader from './Header.vue'
+	import UHeader from './Header.vue'
 	export default {
 		components: {
-			SideBar, MHeader
+			SideBar, UHeader
 		}
 	}
 </script>
 
 <style>
-	html,
-	body,
-	#app,
-	.main-page {
-		width:100%;
+	html,body,#app,.main-page {
 		height:100%;
-		overflow: hidden;
 	}
-	
+	.main-page {
+		display: flex;
+		flex-direction: row;
+	}
 	.content {
-		position:absolute;
-		left:250px;
-		top:70px;
-		right:0;
-		bottom:0;
-		overflow-y: scroll;
+		flex:1;
+		padding-left:20px;
+		background:rgb( 236,236,236 );
 	}
 </style>

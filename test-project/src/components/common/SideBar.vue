@@ -1,18 +1,22 @@
 <template>
-	<div class="sideBar">
+	<div class="sideBar"
+		:style="sideBarStyle">
 		<el-menu
 	      :default-active="onRoutes"
 	      class="el-menu-vertical-demo"
-	      @open="handleOpen"
-	      @close="handleClose"
 	      background-color="#545c64"
 	      text-color="#fff"
 	      active-text-color="#ffd04b"
+	      @open="handleOpen" 
+	      @close="handleClose" 
+	      :collapse="isCollapse"
 	      router>
 	      <template  v-for="item in menuItems">
 		      <template v-if="item.subs">
 		      	<el-submenu :index="item.index">
-			      	<template slot="title"><i :class="item.icon"></i>{{ item.title }}
+			      	<template slot="title">
+			      		<i :class="item.icon"></i>
+			      		<span slot="title">{{ item.title }}</span>
 			      	</template>
 				    <el-menu-item v-for="subItem in item.subs"
 				    	:index="subItem.index">{{ subItem.title }}
@@ -85,12 +89,33 @@
 	                index: 'drag',
 	                title: '拖拽'
 	            }
-	        ]
+	        ],
+	        
 	      }
 	    },
 	    computed:{
+	    	isCollapse() {
+	    		return this.$store.state.menuFolded
+	    	}, 
 		    onRoutes() {
 		        return this.$route.path.replace('/','');
+		    },
+		    sideBarStyle() {
+		    	//通过this.$store.state访问store里面的状态
+		    	
+		    	if( this.$store.state.menuFolded ) {
+		    		return {
+		    			flexGrow:'0',
+		    			flexShrink:'0',
+		    			flexBasis:'64px'
+		    		}
+		    	}else {
+		    		return {
+		    			flexGrow:'0',
+		    			flexShrink:'0',
+		    			flexBasis:'200px'
+		    		}
+		    	}
 		    }
 	   	},
 	   	methods: {
@@ -106,15 +131,16 @@
 
 <style>
 	.sideBar {
-		width:250px;
 		display: block;
-		position:absolute;
-		left:0;
-		top:70px;
-		display: block;
-		bottom:0;
+		
 	}
 	.sideBar > ul {
 		height:100%;
+	}
+	.el-menu {
+		border:none;
+	}
+	.el-menu li.is-active {
+		color:#76b6e4 !important;
 	}
 </style>

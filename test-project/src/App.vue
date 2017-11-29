@@ -8,5 +8,6 @@
 </script>
 
 <style>
-	@import '../static/css/mainPage.css'
+	@import '../static/css/mainPage.css';
+	
 </style>
