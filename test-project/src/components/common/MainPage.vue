@@ -3,7 +3,9 @@
 		<side-bar></side-bar>
 		<div class="content">
 			<u-header></u-header>
-			<router-view></router-view>
+			<div class="content-panel">
+				<router-view></router-view>
+			</div>
 		</div>
 	</div>
 </template>
@@ -30,5 +32,13 @@
 		flex:1;
 		padding-left:20px;
 		background:rgb( 236,236,236 );
+		display: flex;
+		flex-direction: column;
+	}
+	.content-panel {
+		margin-top:30px;
+		padding:24px;
+		background: #fff;
+		flex:1;
 	}
 </style>

@@ -42,8 +42,8 @@
 	        menuItems: [
 	        	{
 	                icon: 'el-icon-setting',
-	                index: 'readme',
-	                title: '自述'
+	                index: 'mainpage',
+	                title: '首页'
 	            },
 	            {
 	                icon: 'el-icon-menu',

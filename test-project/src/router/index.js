@@ -7,16 +7,16 @@ export default new Router({
   routes: [
   	{
   		path: '/',
-  		redirect: '/readme'
+  		redirect: '/mainpage'
   	},
     {
-      path: '/readme',
-      name: 'readme',
+      path: '/mainpage',
+      name: 'mainpage',
       component: () => import( '@/components/common/MainPage' ),
       children: [
       	{
       		path: '/',
-      		component: () => import( '@/components/page/readme.vue' )
+      		component: () => import( '@/components/page/HPage.vue' )
       	},
       	{
       		path: '/basetable',
