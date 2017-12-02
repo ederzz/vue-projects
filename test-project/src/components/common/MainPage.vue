@@ -6,6 +6,7 @@
 			<div class="content-panel">
 				<router-view></router-view>
 			</div>
+			<u-footer></u-footer>
 		</div>
 	</div>
 </template>
@@ -13,9 +14,10 @@
 <script>
 	import SideBar from './SideBar.vue'
 	import UHeader from './Header.vue'
+	import UFooter from './Footer.vue'
 	export default {
 		components: {
-			SideBar, UHeader
+			SideBar, UHeader, UFooter
 		}
 	}
 </script>

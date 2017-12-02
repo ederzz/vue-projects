@@ -22,6 +22,7 @@
 					<div class="circle-w"></div>
 				</div>
 			</div>
+			<span class="nick-name" v-show="!ifShow">神以灵</span>
 		  </div>
 	      <template  v-for="item in menuItems">
 		      <template v-if="item.subs">
@@ -102,10 +103,12 @@
 	                title: '拖拽'
 	            }
 	        ],
-	        
 	      }
 	    },
 	    computed:{
+	    	ifShow(){
+	    		return this.$store.state.menuFolded
+	    	},
 	    	isCollapse() {
 	    		return this.$store.state.menuFolded
 	    	}, 
@@ -158,16 +161,27 @@
 	.taichi-box {
 		background: transparent;
 		margin:50px auto;
-		width:100px;
-		opacity: 0.7;
+		display: flex;
+		align-items: center;
+		/*width:100px;*/
+		justify-content:center;
+		
+	}
+	.nick-name {
+		color:#fff;
+		font-size: 24px;
+		font-family: "Microsoft YaHei", "SimHei";
+		padding:0 20px;
 	}
 	.tai-chi {
-		width:100px;
-		height:100px;
+		width:50px;
+		height:50px;
 		position:relative;
 		border-radius:50%;
 		animation: spin 6s linear infinite;
 		box-shadow: 0px 0px 75px 15px #b6efe7b3;
+		opacity: 0.7;
+		font-weight: bolder;
 	}
 	.taiChi-left {
 		width:50%;
