@@ -11,6 +11,18 @@
 	      @close="handleClose" 
 	      :collapse="isCollapse"
 	      router>
+	      <div class="taichi-box">
+			<div class="tai-chi">
+				<div class="taiChi-left"></div>
+				<div class="taiChi-right"></div>
+				<div class="b-circle">
+					<div class="circle-b"></div>
+				</div>
+				<div class="w-circle">
+					<div class="circle-w"></div>
+				</div>
+			</div>
+		  </div>
 	      <template  v-for="item in menuItems">
 		      <template v-if="item.subs">
 		      	<el-submenu :index="item.index">
@@ -142,5 +154,83 @@
 	}
 	.el-menu li.is-active {
 		color:#76b6e4 !important;
+	}
+	.taichi-box {
+		background: transparent;
+		margin:50px auto;
+		width:100px;
+		opacity: 0.7;
+	}
+	.tai-chi {
+		width:100px;
+		height:100px;
+		position:relative;
+		border-radius:50%;
+		animation: spin 6s linear infinite;
+		box-shadow: 0px 0px 75px 15px #b6efe7b3;
+	}
+	.taiChi-left {
+		width:50%;
+		height: 100%;
+		border-radius:100% 0 0 100% /50% 0 0 50%;
+		background:#000;
+		position: absolute;
+		top:0;
+		left:0;
+	}
+	
+	.taiChi-right {
+		width:50%;
+		height: 100%;
+		border-radius:0 100% 100% 0 /0 50% 50% 0;
+		background:#fff;
+		position: absolute;
+		right:0;
+		top:0;
+	}
+	.b-circle {
+		width:50%;
+		height:50%;
+		border-radius: 50%;
+		background:#000;
+		position:absolute;
+		top:0;
+		right:25%;
+	}
+	.circle-b {
+		width:25%;
+		height:25%;
+		background:#fff;
+		border-radius: 50%;
+		position:absolute;
+		top:40%;
+		left:40%;
+	}
+	.w-circle {
+		width:50%;
+		height:50%;
+		border-radius: 50%;
+		background:#fff;
+		position:absolute;
+		bottom:0;
+		left:25%;
+	}
+	.circle-w {
+		width:25%;
+		height:25%;
+		background:#000;
+		border-radius: 50%;
+		position:absolute;
+		top:40%;
+		left:40%;
+	}
+	
+	@keyframes spin {
+		0% {
+			transform: rotate( 0deg );
+		}
+		100% {
+			transform: rotate( 360deg );
+		}
 	}
 </style>
